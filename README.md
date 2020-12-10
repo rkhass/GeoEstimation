@@ -5,29 +5,12 @@ This is the official GitHub page for the paper ([Link](http://openaccess.thecvf.
 "Geolocation Estimation of Photos using a Hierarchical Model and Scene Classification".
 In: *European Conference on Computer Vision (ECCV)*, Munich, Springer, 2018, 575-592.
 
-## News
-
-**17th February 2020:** Since our code is not compatible with TensorFlow 2 and relies on a Caffe model for scene classification, we have added a Dockerfile to simplify the [installation](#installation). In addition, we have modified the [inference script](#inference). It is now able to automatically generate the reported results in the paper for the testing datasets.
-
-**21th February 2020:** We have updated our code to TensorFlow 2 and provide a simplified training script. Unfortunately, the converted models achieve different results on the testing datasets. Please checkout the branch [*tf2*](https://github.com/TIBHannover/GeoEstimation/tree/tf2) to train your own models and follow the [instructions](#training).
-
-## Demo
-
-A graphical demonstration where you can compete against the deep learning approach presented in the publication can be found on: https://tibhannover.github.io/GeoEstimation/
-
-We also created an extended web-tool that additionally supports uploading and analyzing your own images: https://labs.tib.eu/geoestimation
-
 ## Content
 
-This repository contains:
-- Meta information for the
-[MP-16](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/mp16_places365.csv)
-training dataset and [image urls](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/mp16_urls.csv) as well as the [Im2GPS](meta/im2gps_places365.csv) and
-[Im2GPS3k](meta/im2gps3k_places365.csv) test datasets
-- List of geographical cells for all partitionings:
-[coarse](geo-cells/cells_50_5000.csv),
-[middle](geo-cells/cells_50_2000.csv),
-[fine](geo-cells/cells_50_1000.csv)
+This branch contains:
+- Meta information for the [MP-16](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/mp16_places365.csv)
+training dataset and [image urls](https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/mp16_urls.csv) as well as the [Im2GPS](meta/im2gps_places365.csv) and [Im2GPS3k](meta/im2gps3k_places365.csv) test datasets
+- List of geographical cells for all partitionings: [coarse](geo-cells/cells_50_5000.csv), [middle](geo-cells/cells_50_2000.csv), [fine](geo-cells/cells_50_1000.csv)
 - Results for the reported approaches on [Im2GPS](results/im2gps) and [Im2GPS3k](results/im2gps3k) <approach_parameters.csv>
 - A python script to download all necessary resources to run the scripts `downloader.py`
 - Inference script to reproduce the paper results `inference.py`
@@ -39,17 +22,6 @@ The (list of) image files for training and testing can be found on the following
 * MP-16 (direct image links): https://github.com/TIBHannover/GeoEstimation/releases/download/v1.0/mp16_urls.csv
 * Im2GPS: http://graphics.cs.cmu.edu/projects/im2gps/
 * Im2GPS-3k: https://github.com/lugiavn/revisiting-im2gps/
-
-## Geographical Cell Partitioning
-
-The geographical cell labels are extracted using the *S2 geometry library*:
-https://code.google.com/archive/p/s2-geometry-library/
-
-The python implementation *s2sphere* can be found on:
-http://s2sphere.readthedocs.io/en/
-
-The geographical cells can be visualized on:
-http://s2.sidewalklabs.com/regioncoverer/
 
 ## Scene Classification
 
@@ -111,7 +83,7 @@ python inference.py -i <PATH/TO/IMG/FILES/*.jpg> -m <MODEL> -l <PATH/TO/META/INF
 
 ## Training
 
-Please checkout the branch [tf2](https://github.com/TIBHannover/GeoEstimation/tree/tf2) and follow the instructions.
+Please checkout the branch [pytorch](https://github.com/TIBHannover/GeoEstimation/tree/pytorch) and follow the instructions.
 
 ## LICENSE
 
