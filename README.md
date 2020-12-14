@@ -1,4 +1,6 @@
 # Geolocation Estimation of Photos using a Hierarchical Model and Scene Classification
+[![Conference](http://img.shields.io/badge/ECCV-2018-4b44ce.svg)](https://openaccess.thecvf.com/content_ECCV_2018/papers/Eric_Muller-Budack_Geolocation_Estimation_of_ECCV_2018_paper.pdf)
+
 This is the official GitHub page for the paper ([Link](http://openaccess.thecvf.com/content_ECCV_2018/papers/Eric_Muller-Budack_Geolocation_Estimation_of_ECCV_2018_paper.pdf)):
 
 > Eric Müller-Budack, Kader Pustu-Iren, Ralph Ewerth:
