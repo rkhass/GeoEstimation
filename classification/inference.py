@@ -62,8 +62,8 @@ def load_model(args):
 
 
 def load_model_custom():
-    checkpoint = Path("geoestimation_v2/models/base_M/epoch=014-val_loss=18.4833.ckpt")
-    hparams = Path("geoestimation_v2/models/base_M/hparams.yaml")
+    checkpoint = Path("GeoEstimation/models/base_M/epoch=014-val_loss=18.4833.ckpt")
+    hparams = Path("GeoEstimation/models/base_M/hparams.yaml")
     gpu = False
 
     print("Load model from ", checkpoint)
