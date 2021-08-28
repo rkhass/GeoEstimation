@@ -239,3 +239,66 @@ class FiveCropImageDataset(torch.utils.data.Dataset):
         for crop in crops:
             crops_transformed.append(self.tfm(crop))
         return torch.stack(crops_transformed, dim=0), meta
+
+
+class FiveCropImageDatasetCustom(torch.utils.data.Dataset):
+    def __init__(
+        self,
+        img_path
+        # meta_csv: Union[str, Path, None],
+        # image_dir: Union[str, Path],
+        # img_id_col: Union[str, int] = "img_id",
+        # allowed_extensions: List[str] = ["jpg", "jpeg", "png"]
+    ):
+        # if isinstance(image_dir, str):
+        #     image_dir = Path(image_dir)
+        # self.image_dir = image_dir
+        # self.img_id_col = img_id_col
+        # self.meta_info = None
+        # if meta_csv is not None:
+        #     print(f"Read {meta_csv}")
+        #     self.meta_info = pd.read_csv(meta_csv)
+        #     self.meta_info.columns = map(str.lower, self.meta_info.columns)
+        #     # rename column names if necessary to use existing data
+        #     if "lat" in self.meta_info.columns:
+        #         self.meta_info.rename(columns={"lat": "latitude"}, inplace=True)
+        #     if "lon" in self.meta_info.columns:
+        #         self.meta_info.rename(columns={"lon": "longitude"}, inplace=True)
+        #     self.meta_info["img_path"] = self.meta_info[img_id_col].apply(
+        #         lambda img_id: str(self.image_dir / img_id)
+        #     )
+        # else:
+        #     image_files = []
+        #     for ext in allowed_extensions:
+        #         image_files.extend([str(p) for p in self.image_dir.glob(f"**/*.{ext}")])
+        #     self.meta_info = pd.DataFrame(image_files, columns=["img_path"])
+        #     self.meta_info[self.img_id_col] = self.meta_info["img_path"].apply(
+        #         lambda x: Path(x).stem
+        #     )
+
+        self.meta = {}
+        self.meta["img_path"] = img_path
+        self.tfm = torchvision.transforms.Compose(
+            [
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize(
+                    (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
+                ),
+            ]
+        )
+
+    def __len__(self):
+        return 1
+
+    def __getitem__(self, i) -> Tuple[torch.Tensor, dict]:
+        # meta = self.meta_info.iloc[idx]
+        # meta = meta.to_dict()
+        # meta["img_id"] = meta[self.img_id_col]
+
+        image = Image.open(self.meta["img_path"]).convert("RGB")
+        image = torchvision.transforms.Resize(256)(image)
+        crops = torchvision.transforms.FiveCrop(224)(image)
+        crops_transformed = []
+        for crop in crops:
+            crops_transformed.append(self.tfm(crop))
+        return torch.stack(crops_transformed, dim=0), self.meta
